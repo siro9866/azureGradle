@@ -1,7 +1,5 @@
 package com.seowoninfo.azuregradle.board.repository;
 
-import com.seowoninfo.azuregradle.board.entity.Board;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Repository;
  * Description :
  */
 @Repository
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository {
 
 }
+
+// public interface BoardRepository extends JpaRepository<Board, Long> {
