@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id "com.microsoft.azure.azurewebapp" version "1.10.0"
+}
+
+group = 'com.seowoninfo'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.4.2'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
+    // https://mvnrepository.com/artifact/dev.akkinoc.util/yaml-resource-bundle
+    implementation group: 'dev.akkinoc.util', name: 'yaml-resource-bundle', version: '2.13.0'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: '2.18.0'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+azurewebapp {
+    resourceGroup = 'leekw01_group'
+    appName = 'azureGradle'
+    runtime {
+        os = 'Linux'
+        webContainer = 'Java SE' // or 'Java SE' if you want to run an executable jar
+        javaVersion = 'Java 17'
+    }
+    auth {
+        type = 'azure_cli' // support azure_cli, oauth2, device_code and service_principal
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
