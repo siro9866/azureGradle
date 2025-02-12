@@ -44,7 +44,7 @@ dependencies {
 }
 
 azurewebapp {
-    resourceGroup = 'leekw01_group'
+    resourceGroup = 'azure1_group'
     appName = 'azureGradle'
     runtime {
         os = 'Linux'
